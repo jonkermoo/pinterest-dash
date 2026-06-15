@@ -1,4 +1,4 @@
-# Pinterest API Tool
+# PinDash
 
 A standalone, deployment-ready web application for obtaining Pinterest API credentials and monitoring pin performance. No backend required—everything runs in your browser!
 
@@ -142,6 +142,13 @@ Also update it in the app's Settings page.
 - **Direct API Calls**: Your browser communicates directly with Pinterest
 - **No Data Collection**: We don't collect or store any data
 
+### Legal & Compliance
+
+- **Privacy Policy**: Available at `/privacy` - explains data handling
+- **Terms of Service**: Available at `/terms` - outlines usage terms
+- **Pinterest Compliance**: Adheres to Pinterest's API Terms and Developer Guidelines
+- **User Control**: Complete control over your data with easy deletion
+
 ### Best Practices
 
 1. **Never share your App Secret** publicly
@@ -149,6 +156,8 @@ Also update it in the app's Settings page.
 3. **Rotate tokens** regularly
 4. **Monitor API usage** for suspicious activity
 5. **Follow Pinterest's rate limits** (1000 req/hour/user)
+6. **Review Privacy Policy** before using the tool
+7. **Clear data** when using shared devices
 
 ## 📊 Available Features
 

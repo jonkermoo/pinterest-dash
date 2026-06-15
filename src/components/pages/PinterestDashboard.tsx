@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { pinterestApi, type Board, type Pin, type PinAnalytics } from '../../services/pinterestApi';
+import { pinterestApi, type Board, type Pin } from '../../services/pinterestApi';
 
 export default function PinterestDashboard() {
   const navigate = useNavigate();
@@ -72,14 +72,6 @@ export default function PinterestDashboard() {
     }
   };
 
-  const getDaysAgo = () => {
-    switch (dateRange) {
-      case '7d': return 7;
-      case '30d': return 30;
-      case '90d': return 90;
-      default: return 30;
-    }
-  };
 
   if (loading) {
     return (

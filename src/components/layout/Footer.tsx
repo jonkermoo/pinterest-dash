@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           {/* About */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Pinterest API Tool</h3>
+            <h3 className="font-semibold text-gray-900 mb-4">PinDash</h3>
             <p className="text-sm text-gray-600">
               A simple tool to obtain Pinterest API credentials and monitor your pin performance.
             </p>
@@ -82,13 +82,23 @@ export default function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4">Legal</h3>
             <ul className="space-y-2 text-sm">
               <li>
+                <Link to="/privacy" className="text-gray-600 hover:text-red-600 transition">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="text-gray-600 hover:text-red-600 transition">
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
                 <a
                   href="https://policy.pinterest.com/en/privacy-policy"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-red-600 transition"
                 >
-                  Privacy Policy
+                  Pinterest Privacy
                 </a>
               </li>
               <li>
@@ -98,7 +108,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-red-600 transition"
                 >
-                  Terms of Service
+                  Pinterest Terms
                 </a>
               </li>
             </ul>
@@ -109,7 +119,7 @@ export default function Footer() {
         <div className="mt-8 pt-8 border-t border-gray-200">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-gray-600 text-center md:text-left">
-              © {new Date().getFullYear()} Pinterest API Tool. Not affiliated with Pinterest, Inc.
+              © {new Date().getFullYear()} PinDash. Not affiliated with Pinterest, Inc.
             </p>
             <p className="text-sm text-gray-600 text-center md:text-right">
               Built with React, TypeScript, and Tailwind CSS

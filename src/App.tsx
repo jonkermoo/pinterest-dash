@@ -9,6 +9,8 @@ import PinterestAuth from "./components/pages/PinterestAuth";
 import PinterestCallback from "./components/pages/PinterestCallback";
 import PinterestCredentials from "./components/pages/PinterestCredentials";
 import PinterestDashboard from "./components/pages/PinterestDashboard";
+import PrivacyPolicy from "./components/pages/PrivacyPolicy";
+import TermsOfService from "./components/pages/TermsOfService";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/callback" element={<PinterestCallback />} />
           <Route path="/credentials" element={<PinterestCredentials />} />
           <Route path="/dashboard" element={<PinterestDashboard />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
         </Routes>
       </main>
       <Footer />

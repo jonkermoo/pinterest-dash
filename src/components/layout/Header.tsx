@@ -21,7 +21,7 @@ export default function Header() {
               </svg>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">Pinterest API Tool</h1>
+              <h1 className="text-xl font-bold text-gray-900">PinDash</h1>
             </div>
           </Link>
 
