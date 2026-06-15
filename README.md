@@ -273,4 +273,3 @@ This tool is for obtaining and managing Pinterest API credentials. Users are res
 ---
 
 Built with ❤️ using React, TypeScript, Tailwind CSS, and Vite
-# pinterest-dash
