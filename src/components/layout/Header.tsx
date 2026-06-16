@@ -21,7 +21,7 @@ export default function Header() {
               </svg>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">PinDash</h1>
+              <h1 className="text-xl font-bold text-gray-900">PinScheduler</h1>
             </div>
           </Link>
 
@@ -30,17 +30,17 @@ export default function Header() {
             <NavLink to="/" className={navLinkClass}>
               Home
             </NavLink>
-            <NavLink to="/setup" className={navLinkClass}>
-              Setup Guide
+            <NavLink to="/schedule" className={navLinkClass}>
+              Schedule
+            </NavLink>
+            <NavLink to="/scheduled" className={navLinkClass}>
+              My Pins
+            </NavLink>
+            <NavLink to="/dashboard" className={navLinkClass}>
+              Analytics
             </NavLink>
             <NavLink to="/settings" className={navLinkClass}>
               Settings
-            </NavLink>
-            <NavLink to="/auth" className={navLinkClass}>
-              Connect
-            </NavLink>
-            <NavLink to="/dashboard" className={navLinkClass}>
-              Dashboard
             </NavLink>
           </nav>
 
@@ -91,7 +91,7 @@ export default function Header() {
                 Home
               </NavLink>
               <NavLink
-                to="/setup"
+                to="/schedule"
                 className={({ isActive }) =>
                   `px-4 py-2 rounded-lg transition ${
                     isActive ? "bg-red-50 text-red-600 font-semibold" : "text-gray-700 hover:bg-gray-50"
@@ -99,7 +99,29 @@ export default function Header() {
                 }
                 onClick={() => setMenuOpen(false)}
               >
-                Setup Guide
+                Schedule Pin
+              </NavLink>
+              <NavLink
+                to="/scheduled"
+                className={({ isActive }) =>
+                  `px-4 py-2 rounded-lg transition ${
+                    isActive ? "bg-red-50 text-red-600 font-semibold" : "text-gray-700 hover:bg-gray-50"
+                  }`
+                }
+                onClick={() => setMenuOpen(false)}
+              >
+                My Scheduled Pins
+              </NavLink>
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  `px-4 py-2 rounded-lg transition ${
+                    isActive ? "bg-red-50 text-red-600 font-semibold" : "text-gray-700 hover:bg-gray-50"
+                  }`
+                }
+                onClick={() => setMenuOpen(false)}
+              >
+                Analytics
               </NavLink>
               <NavLink
                 to="/settings"
@@ -111,28 +133,6 @@ export default function Header() {
                 onClick={() => setMenuOpen(false)}
               >
                 Settings
-              </NavLink>
-              <NavLink
-                to="/auth"
-                className={({ isActive }) =>
-                  `px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-50 text-red-600 font-semibold" : "text-gray-700 hover:bg-gray-50"
-                  }`
-                }
-                onClick={() => setMenuOpen(false)}
-              >
-                Connect
-              </NavLink>
-              <NavLink
-                to="/dashboard"
-                className={({ isActive }) =>
-                  `px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-50 text-red-600 font-semibold" : "text-gray-700 hover:bg-gray-50"
-                  }`
-                }
-                onClick={() => setMenuOpen(false)}
-              >
-                Dashboard
               </NavLink>
             </div>
           </nav>

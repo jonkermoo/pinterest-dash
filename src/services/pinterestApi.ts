@@ -83,7 +83,7 @@ class PinterestApiService {
       client_id: config.appId,
       redirect_uri: config.redirectUri,
       response_type: 'code',
-      scope: 'boards:read,pins:read,user_accounts:read,ads:read',
+      scope: 'boards:read,boards:write,pins:read,pins:write,user_accounts:read',
       state: state || this.generateState(),
     });
 
@@ -296,6 +296,40 @@ class PinterestApiService {
 
     if (!response.ok) {
       throw new Error(`Failed to get user analytics: ${response.statusText}`);
+    }
+
+    return response.json();
+  }
+
+  // Create a new pin
+  async createPin(
+    accessToken: string,
+    pinData: {
+      board_id: string;
+      title?: string;
+      description?: string;
+      link?: string;
+      media_source: {
+        source_type: 'image_url' | 'image_base64';
+        url?: string;
+        data?: string;
+        content_type?: string;
+      };
+    }
+  ): Promise<Pin> {
+    const config = this.getConfig();
+    const response = await fetch(`${config.apiUrl}/pins`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(pinData),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(`Failed to create pin: ${error.message || response.statusText}`);
     }
 
     return response.json();

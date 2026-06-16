@@ -1,9 +1,9 @@
 {
-  "name": "pindash",
+  "name": "pinscheduler",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
-  "description": "PinDash - A tool for obtaining Pinterest API credentials and monitoring pin performance",
+  "description": "PinScheduler - Schedule and publish pins to Pinterest automatically with bulk upload support",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

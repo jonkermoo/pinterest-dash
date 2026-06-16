@@ -1,16 +1,27 @@
-# PinDash
+# PinScheduler
 
-A standalone, deployment-ready web application for obtaining Pinterest API credentials and monitoring pin performance. No backend required—everything runs in your browser!
+A Pinterest-compliant content scheduling and publishing tool that helps creators maintain a consistent posting schedule. Schedule pins for future publishing, bulk upload from CSV, and track performance—all from your browser with no backend required!
 
 ## 🎯 Features
 
+- **📅 Pin Scheduling**: Schedule pins for automatic publishing at specific dates and times
+- **📤 Bulk Upload**: Import and schedule hundreds of pins at once via CSV
+- **🎨 Pin Creation**: Create pins with images, titles, descriptions, and destination links
+- **📊 Analytics Dashboard**: Track impressions, saves, clicks, and engagement metrics
 - **🔒 Secure OAuth 2.0**: Connect Pinterest accounts with CSRF protection
-- **⚙️ Browser-Based Config**: Enter API credentials directly in the app (no .env files)
-- **📊 Real-Time Analytics**: Track impressions, saves, clicks, and engagement
-- **💾 Credential Export**: Download tokens as JSON for external use
-- **🚀 Easy Deployment**: Deploy to any static hosting in minutes
-- **🔐 Privacy First**: All credentials stored locally in browser
+- **💾 Local Storage**: All data stored securely in your browser
+- **🚀 No Backend**: Pure frontend application, easy to deploy anywhere
 - **📱 Responsive Design**: Works on desktop and mobile devices
+
+## 🌟 Why PinScheduler?
+
+PinScheduler demonstrates clear value to Pinterest's ecosystem by:
+
+- **Helping creators publish more content consistently** - Automated scheduling removes the burden of manual posting
+- **Improving content quality** - Time to plan and prepare pins in advance
+- **Increasing Pinterest engagement** - Consistent posting schedule drives more traffic
+- **Supporting content creators** - Free tool that helps grow Pinterest presence
+- **Following Pinterest guidelines** - Built with API v5 and compliant with developer policies
 
 ## 🚀 Quick Start
 
@@ -18,8 +29,9 @@ A standalone, deployment-ready web application for obtaining Pinterest API crede
 
 1. **Visit the deployed site** (or run locally)
 2. **Go to Settings** and enter your Pinterest App ID and Secret
-3. **Connect** your Pinterest account
-4. **Monitor** your pins and export credentials
+3. **Connect** your Pinterest account via OAuth
+4. **Schedule pins** individually or via bulk CSV upload
+5. **Monitor** scheduled and published pins in the dashboard
 
 ### For Developers
 
@@ -42,8 +54,8 @@ Visit `http://localhost:5173`
 1. Go to [Pinterest Developers](https://developers.pinterest.com/apps/)
 2. Sign in and click "Create app"
 3. Fill in app details:
-   - **Name**: Your app name
-   - **Description**: What your app does
+   - **Name**: PinScheduler (or your preferred name)
+   - **Description**: "A scheduling tool that helps creators publish pins consistently to grow their Pinterest presence"
    - **Website**: Your website URL
 
 ### Step 2: Configure OAuth
@@ -61,12 +73,11 @@ Visit `http://localhost:5173`
 3. Verify the redirect URI matches your deployment
 4. Click **Save Settings**
 
-### Step 4: Connect & Use
+### Step 4: Connect & Schedule
 
-1. Go to **Connect** page
-2. Click "Connect to Pinterest"
-3. Authorize the app
-4. View credentials and analytics!
+1. Go to **Connect** page (or click "Schedule" in nav)
+2. Authorize the app with Pinterest
+3. Start scheduling pins!
 
 ## 🏗️ Project Structure
 
@@ -83,16 +94,56 @@ pinterest-api-tool/
 │   │       ├── PinterestSetup.tsx   # Setup guide
 │   │       ├── PinterestAuth.tsx    # Authentication
 │   │       ├── PinterestCallback.tsx # OAuth callback
-│   │       ├── PinterestCredentials.tsx # Credentials display
-│   │       └── PinterestDashboard.tsx # Analytics dashboard
+│   │       ├── SchedulePins.tsx     # Schedule new pins
+│   │       ├── ScheduledPins.tsx    # View/manage scheduled pins
+│   │       ├── BulkUpload.tsx       # CSV bulk upload
+│   │       ├── PinterestDashboard.tsx # Analytics dashboard
+│   │       └── PinterestCredentials.tsx # Credentials display
 │   ├── services/
-│   │   └── pinterestApi.ts         # API service layer
+│   │   ├── pinterestApi.ts         # Pinterest API service
+│   │   └── schedulerService.ts     # Scheduling logic
 │   ├── App.tsx                     # Main app with routes
 │   └── main.tsx                    # Entry point
 ├── index.html
 ├── package.json
 └── README.md
 ```
+
+## 📅 Scheduling Features
+
+### Individual Pin Scheduling
+
+- Create pins with images (upload or URL)
+- Add titles, descriptions, and destination links
+- Select target board
+- Choose publish date and time
+- Instant publish option available
+
+### Bulk CSV Upload
+
+Upload multiple pins at once with CSV format:
+
+```csv
+board_id,title,description,link,image_url,scheduled_time
+123456789,Pin Title,Pin description,https://example.com,https://example.com/image.jpg,2026-12-31T12:00:00
+```
+
+**Required columns:**
+- `board_id` - Pinterest board ID
+- `title` - Pin title (max 100 characters)
+- `scheduled_time` - ISO 8601 format (YYYY-MM-DDTHH:MM:SS)
+
+**Optional columns:**
+- `description` - Pin description (max 500 characters)
+- `link` - Destination URL
+- `image_url` - Direct image URL
+
+### Automatic Publishing
+
+- Scheduler checks every minute for due pins
+- Automatically publishes pins at scheduled times
+- Handles errors gracefully with retry options
+- Updates pin status in real-time
 
 ## 🌐 Deployment
 
@@ -110,13 +161,6 @@ npm run build
 netlify deploy --prod --dir=dist
 ```
 
-### Deploy to GitHub Pages
-
-```bash
-npm run build
-# Push dist folder to gh-pages branch
-```
-
 ### Deploy to Any Static Host
 
 ```bash
@@ -126,7 +170,7 @@ npm run build
 
 ### Important: Update Redirect URI
 
-After deployment, update your Pinterest app's redirect URI to match your production URL:
+After deployment, update your Pinterest app's redirect URI:
 ```
 https://yourdomain.com/callback
 ```
@@ -138,16 +182,22 @@ Also update it in the app's Settings page.
 ### How It Works
 
 - **No Backend**: Everything runs in your browser
-- **Local Storage**: Credentials stored in browser's localStorage
-- **Direct API Calls**: Your browser communicates directly with Pinterest
-- **No Data Collection**: We don't collect or store any data
+- **Local Storage**: Credentials and scheduled pins stored in browser's localStorage
+- **Direct API Calls**: Your browser communicates directly with Pinterest API
+- **No Data Collection**: We don't collect, store, or transmit any user data
+- **Secure OAuth**: Industry-standard OAuth 2.0 with CSRF protection
 
-### Legal & Compliance
+### Pinterest API Compliance
 
-- **Privacy Policy**: Available at `/privacy` - explains data handling
-- **Terms of Service**: Available at `/terms` - outlines usage terms
-- **Pinterest Compliance**: Adheres to Pinterest's API Terms and Developer Guidelines
-- **User Control**: Complete control over your data with easy deletion
+This tool is built following Pinterest's Developer Guidelines:
+
+- ✅ Uses official Pinterest API v5
+- ✅ Implements proper OAuth 2.0 authentication
+- ✅ Respects rate limits (1000 requests/hour/user)
+- ✅ Adds value to Pinterest ecosystem by helping creators publish consistently
+- ✅ Includes Privacy Policy and Terms of Service
+- ✅ Transparent about data usage (all local, no external storage)
+- ✅ Follows content publishing best practices
 
 ### Best Practices
 
@@ -155,37 +205,47 @@ Also update it in the app's Settings page.
 2. **Use HTTPS** in production
 3. **Rotate tokens** regularly
 4. **Monitor API usage** for suspicious activity
-5. **Follow Pinterest's rate limits** (1000 req/hour/user)
-6. **Review Privacy Policy** before using the tool
+5. **Follow Pinterest's rate limits**
+6. **Review Privacy Policy** before using
 7. **Clear data** when using shared devices
+8. **Schedule responsibly** - don't spam Pinterest
 
 ## 📊 Available Features
+
+### Schedule Pins Page
+- Upload images or provide URLs
+- Add titles and descriptions
+- Set destination links
+- Choose boards
+- Schedule for future or publish immediately
+
+### Scheduled Pins Page
+- View all scheduled pins
+- Filter by status (pending, published, failed)
+- Edit scheduled pins
+- Delete scheduled pins
+- Retry failed pins
+- Real-time status updates
+
+### Bulk Upload Page
+- Download CSV template
+- Upload CSV files
+- Paste CSV content
+- Batch schedule hundreds of pins
+- Error reporting and validation
+
+### Analytics Dashboard
+- View all boards and pins
+- Track impressions, saves, clicks
+- Monitor engagement metrics
+- Time period filtering (7/30/90 days)
+- Board-level analytics
 
 ### Settings Page
 - Configure Pinterest App ID and Secret
 - Set custom redirect URI
 - Clear all settings and disconnect
-
-### Authentication
-- Secure OAuth 2.0 flow
-- CSRF protection
-- Token refresh capability
-
-### Dashboard
-- View all boards
-- Browse pins with images
-- Real-time analytics:
-  - Impressions
-  - Saves (Repins)
-  - Pin clicks
-  - Outbound clicks
-- Time period filtering (7/30/90 days)
-
-### Credentials
-- View access token and refresh token
-- Copy to clipboard
-- Export as JSON
-- Token expiration tracking
+- View connection status
 
 ## 🛠️ Development
 
@@ -212,6 +272,7 @@ npm run lint
 - **Vite** - Build tool
 - **Tailwind CSS** - Styling
 - **React Router** - Navigation
+- **Pinterest API v5** - Pin creation and analytics
 
 ## 📚 API Documentation
 
@@ -220,27 +281,35 @@ For detailed Pinterest API documentation:
 - [Pinterest API v5](https://developers.pinterest.com/docs/api/v5/)
 - [Developer Guidelines](https://policy.pinterest.com/en/developer-guidelines)
 - [OAuth 2.0 Guide](https://developers.pinterest.com/docs/getting-started/authentication/)
+- [Pin Creation](https://developers.pinterest.com/docs/api/v5/#operation/pins/create)
 
 ## 🐛 Troubleshooting
 
 ### "API Not Configured"
 - Go to Settings and enter your App ID and Secret
-- Make sure they're correct from Pinterest Developer Console
+- Verify credentials are correct from Pinterest Developer Console
 
 ### "No authorization code received"
 - Verify redirect URI matches exactly in Pinterest app settings
 - Check for typos in App ID
 - Ensure no trailing slashes in redirect URI
 
-### "Failed to exchange code for token"
-- Verify App Secret is correct
-- Check that your app is approved (for production)
-- Ensure redirect URI is properly configured
+### "Failed to create pin"
+- Verify you have pins:write scope enabled
+- Check image URL is publicly accessible
+- Ensure board_id is correct
+- Verify image meets Pinterest requirements (max 32MB)
+
+### Pins Not Publishing
+- Check browser console for errors
+- Verify access token is still valid
+- Ensure scheduled time is in the future
+- Check Pinterest API status
 
 ### Analytics Not Available
 - Analytics may take 24-48 hours to appear
 - Some metrics require Pinterest Business account
-- Ensure app has correct scopes (ads:read for analytics)
+- Ensure app has correct scopes
 
 ## 📄 License
 
@@ -248,28 +317,33 @@ MIT License - feel free to use for personal or commercial projects
 
 ## ⚠️ Disclaimer
 
-This tool is for obtaining and managing Pinterest API credentials. Users are responsible for:
+This tool helps creators schedule and publish content to Pinterest. Users are responsible for:
 
-- Complying with Pinterest's Terms of Service
+- Complying with Pinterest's Terms of Service and Community Guidelines
 - Protecting their API credentials
 - Following rate limits and usage guidelines
-- Ensuring their use case is approved by Pinterest
+- Ensuring their content meets Pinterest's quality standards
+- Not using the tool for spam or prohibited content
+- Obtaining necessary rights for images and content they publish
 
 ## 🔗 Resources
 
 - [Pinterest Developers](https://developers.pinterest.com/)
 - [Pinterest API Status](https://status.pinterest.com/)
 - [Pinterest Help Center](https://help.pinterest.com/)
+- [Pinterest Business](https://business.pinterest.com/)
 
-## 💡 Why This Tool?
+## 💡 Why This Tool Adds Value to Pinterest
 
-- ✅ **No Backend Required** - Pure frontend, easy to deploy
-- ✅ **Privacy First** - Your data stays in your browser
-- ✅ **Easy Setup** - Just enter credentials and go
-- ✅ **Free to Use** - No subscription or API costs
-- ✅ **Open Source** - Modify as needed
-- ✅ **Production Ready** - Deploy anywhere instantly
+PinScheduler helps Pinterest's ecosystem by:
+
+1. **Enabling Consistent Content** - Creators can maintain regular posting schedules, leading to more content on Pinterest
+2. **Improving Content Quality** - Time to plan and prepare pins in advance results in better content
+3. **Supporting Small Creators** - Free tool helps creators without budget for expensive scheduling tools
+4. **Driving Engagement** - Consistent posting increases overall Pinterest engagement
+5. **Following Best Practices** - Encourages proper pin formatting, descriptions, and linking
+6. **Respecting Platform** - Built with official API, follows guidelines, respects rate limits
 
 ---
 
-Built with ❤️ using React, TypeScript, Tailwind CSS, and Vite
+Built with ❤️ for Pinterest creators using React, TypeScript, Tailwind CSS, and Vite
